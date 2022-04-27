@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#212529">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Lei’s Store</title>
+  <style>
+    body {
+    	display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+    	align-items: center;
+    	overflow: hidden;
+    	margin: 0;
+    	height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f8f9fb;
+      color: #495057;
+      text-align: center;
+		  -webkit-font-smoothing: antialiased;
+		  -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+    	width: 200px;
+    }
+
+    p {
+    	position: absolute;
+    	bottom: 50px;
+    	font-size: 14px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    i {
+      display: inline-block;
+      color: #f03e3e;
+      font-weight: normal;
+      font-style: normal;
+      animation: beat 0.4s infinite alternate;
+    }
+
+    @keyframes beat {
+      to {
+        transform: scale3d(1.3, 1.3, 1.3);
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #212529;
+        color: #e9ecef;
+      }
+    }
+  </style>
+</head>
+<body>
+	<img src="/logo/zce.svg" alt="zce.me">
+  <p>Made with <i>&hearts;</i> by <a href="https://zce.me">zce</a></p>
+</body>
+</html>
