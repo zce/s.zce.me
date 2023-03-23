@@ -33,21 +33,21 @@
       align-items: center;
     }
 
-    .container {
-      border-radius: 10px;
+    svg {
+      border-radius: 20px;
       background: linear-gradient(0, var(--background, #38d9a9) 35%, #0000 35%, #0000 36%, var(--background, #38d9a9) 36%);
       font-weight: 600;
       font-family: system-ui, sans-serif;
       text-anchor: middle;
     }
 
-    .container text:first-child {
+    svg text:first-child {
       fill: var(--color, #ffe66d);
       font-size: var(--font-size, 320px);
       text-shadow: 2px 2px 3px #777;
     }
 
-    .container text:last-child {
+    svg text:last-child {
       fill: var(--background, #38d9a9);
       font-size: 160px;
       filter: invert(65%);
@@ -57,10 +57,10 @@
 </head>
 
 <body>
-  <svg class="container" viewbox="0 0 2000 1000"></svg>
+  <svg viewbox="0 0 2000 1000"></svg>
 
   <script>
-    const element = document.querySelector('.container')
+    const element = document.querySelector('svg')
 
     const params = new URLSearchParams(location.search)
 
