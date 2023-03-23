@@ -38,8 +38,8 @@
 
     svg text:last-child {
       fill: var(--background, #38d9a9);
-      font-size: 160px;
-      filter: invert(65%);
+      font-size: 200px;
+      filter: invert(60%);
       text-transform: uppercase;
     }
   </style>
@@ -97,7 +97,7 @@
     const update = () => {
       const distance = end - Date.now()
       const time = formatString(distance)
-      element.innerHTML = `<text x="50%" y="${yOffset}">${time}</text><text x="50%" y="880">${title}</text>`
+      element.innerHTML = `<text x="50%" y="${yOffset}">${time}</text><text x="50%" y="890">${title}</text>`
       distance > 0 && requestAnimationFrame(update)
     }
 
