@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PDF.js Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body tabindex="1">
+  <div id="container">
+    <div id="viewer" class="pdfViewer"></div>
+  </div>
+  <script src="pdf.js"></script>
+  <script src="viewer.js"></script>
+  <script>
+    // The workerSrc property shall be specified.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdf.worker.js'
+    const params = new URLSearchParams(location.search)
+    const documentUrl = params.get('f') || params.get('file') || params.get('url') || 'document.pdf'
+    const container = document.getElementById('container')
+    const eventBus = new pdfjsViewer.EventBus()
+    // (Optionally) enable hyperlinks within PDF files.
+    const linkService = new pdfjsViewer.PDFLinkService({ eventBus })
+    const pdfViewer = new pdfjsViewer.PDFViewer({ container, eventBus, linkService })
+    linkService.setViewer(pdfViewer)
+    // We can use pdfViewer now, e.g. let's change default scale.
+    eventBus.on('pagesinit', () => { pdfViewer.currentScaleValue = 'page-width' })
+    // Loading document.
+    pdfjsLib.getDocument(documentUrl)
+      .promise.then(docs => {
+        // Document loaded, specifying document for the viewer
+        pdfViewer.setDocument(docs)
+        // and the (optional) linkService.
+        linkService.setDocument(docs, null)
+        // metadata
+        return docs.getMetadata()
+      }).then(data => {
+        const title = data.info.Title || data.metadata && data.metadata.get('dc:title')
+        document.title = title || document.title
+      })
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!-- 
+
+  URL Parameters:
+  - timeout: Countdown duration;
+  - title: Countdown title;
+  - end: End time point;
+  - format: Countdown time format;
+    + 0: hh:mm:ss,ff
+    + 1: hh:mm:ss
+    + 2: hh:mm
+  - color: Countdown text color;
+  - background: Countdown background color;
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown</title>
+  <style>
+    svg {
+      border-radius: 20px;
+      background: linear-gradient(0, var(--background, #38d9a9) 35%, #0000 35%, #0000 36%, var(--background, #38d9a9) 36%);
+      font-weight: 600;
+      font-family: system-ui, sans-serif;
+      text-anchor: middle;
+    }
+
+    svg text:first-child {
+      fill: var(--color, #ffe66d);
+      font-size: var(--font-size, 320px);
+      text-shadow: 2px 2px 3px #777;
+    }
+
+    svg text:last-child {
+      fill: var(--background, #38d9a9);
+      font-size: 200px;
+      filter: invert(60%);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <svg viewbox="0 0 2000 1000"></svg>
+
+  <script>
+    const element = document.querySelector('svg')
+
+    const params = new URLSearchParams(location.search)
+
+    const timeout = ~~params.get('timeout') || 1000 * 60 * 10
+
+    const title = params.get('title') || 'Countdown'
+    const end = new Date(params.get('end') || (Date.now() + timeout)).getTime()
+    const format = ~~params.get('format')
+    const color = params.get('color')
+    const background = params.get('background')
+
+    color && element.style.setProperty('--color', color)
+    background && element.style.setProperty('--background', background)
+
+    let yOffset = 440
+    if (format === 1) { 
+      yOffset = 480
+      element.style.setProperty('--font-size', '420px')
+    } else if (format === 2) { 
+      yOffset = 500
+      element.style.setProperty('--font-size', '480px')
+    }
+
+    const pad = n => n.toString().padStart(2, '0')
+
+    const formatString = time => {
+      time = time > 0 ? time : 0
+
+      const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))
+      const seconds = Math.floor((time % (1000 * 60)) / 1000)
+
+      if (format === 2)
+        return `${pad(minutes)}:${pad(seconds)}`
+
+      const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+
+      if (format === 1)
+        return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`
+
+      const milliseconds = Math.floor(time % 1000 / 10)
+
+      return `${pad(hours)}:${pad(minutes)}:${pad(seconds)},${pad(milliseconds)}`
+    }
+
+    const update = () => {
+      const distance = end - Date.now()
+      const time = formatString(distance)
+      element.innerHTML = `<text x="50%" y="${yOffset}">${time}</text><text x="50%" y="890">${title}</text>`
+      distance > 0 && requestAnimationFrame(update)
+    }
+
+    requestAnimationFrame(update)
+  </script>
+</body>
+
+</html>
