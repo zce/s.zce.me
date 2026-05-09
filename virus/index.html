@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>消灭病毒</title>
+    <script type="module" crossorigin src="assets/index-viIqF9Sz.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/index-DoYBU4t1.css">
+  </head>
+  <body>
+    <main class="shell">
+      <div class="phone">
+        <div class="game-root">
+          <canvas id="game-canvas" width="390" height="844"></canvas>
+
+          <button type="button" id="btn-pause" class="btn-pause is-hidden" aria-label="暂停">
+            <span class="btn-pause__icon btn-pause__icon--pause" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="5" width="4" height="14" rx="1"/>
+                <rect x="14" y="5" width="4" height="14" rx="1"/>
+              </svg>
+            </span>
+            <span class="btn-pause__icon btn-pause__icon--play is-hidden" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+          </button>
+
+          <button type="button" id="btn-mute" class="btn-mute" aria-label="静音">
+            <span class="btn-mute__icon btn-mute__icon--on" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+              </svg>
+            </span>
+            <span class="btn-mute__icon btn-mute__icon--off is-hidden" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <line x1="23" y1="9" x2="17" y2="15"/>
+                <line x1="17" y1="9" x2="23" y2="15"/>
+              </svg>
+            </span>
+          </button>
+
+          <div id="overlay-menu" class="overlay overlay-menu">
+            <h1 class="overlay-menu__title">消灭病毒</h1>
+            <div class="overlay-menu__hints">
+              <span>滑动手指 / 移动鼠标控制战机</span>
+              <span>自动发射子弹消灭病毒</span>
+              <span>击杀特殊病毒可获得强化子弹</span>
+              <span>每关 3 波敌人；清空一波后出现下一波，通关进入下一关</span>
+              <span>大病毒击毁会分裂成多个小病毒，小病毒还能继续分裂（金色等特殊病毒不掉落分裂）</span>
+              <span>最后一击会有击退与旋转缩小，再彻底爆开分裂</span>
+              <span>战机沿机头方向前后冲刺摆动，子弹从机鼻射出</span>
+              <span>病毒碰到战机则游戏结束！</span>
+            </div>
+            <div class="overlay-menu__legend">
+              <div class="legend-item">
+                <span class="legend-item__orb legend-item__orb--triple">3</span>
+                <span class="legend-item__label">三连发</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-item__orb legend-item__orb--laser">L</span>
+                <span class="legend-item__label">激光弹</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-item__orb legend-item__orb--explosive">E</span>
+                <span class="legend-item__label">爆炸弹</span>
+              </div>
+            </div>
+            <button type="button" id="btn-start" class="btn-primary">开始游戏</button>
+          </div>
+
+          <div id="overlay-pause" class="overlay overlay-pause is-hidden">
+            <h2 class="overlay-pause__title">游戏暂停</h2>
+            <p class="overlay-pause__hint">点击「继续」或左上角按钮恢复</p>
+            <button type="button" id="btn-resume" class="btn-primary">继续游戏</button>
+          </div>
+
+          <div id="overlay-gameover" class="overlay overlay-gameover is-hidden">
+            <h2 class="overlay-gameover__title">游戏结束</h2>
+            <div class="overlay-gameover__scores">
+              <span>最终分数：<strong id="final-score" class="score-final">0</strong></span>
+              <span>最高分：<strong id="high-score" class="score-high">0</strong></span>
+            </div>
+            <button type="button" id="btn-retry" class="btn-primary">再来一次</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
